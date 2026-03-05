@@ -8,16 +8,34 @@ We builded a thing using 3D printed stuffeling, Robotic thingelings using Arduin
 
 <table border="0">
   <tr>
-    <td width="50%" align="center">
-      <p><b>Where we started</b></p>
-      <img src="https://github.com/user-attachments/assets/7eca45e3-5e45-43b0-a77d-da908def112a" style="max-width:100%;">
+    <td align="center">
+      <b>What we started with</b><br>
+      <img src="https://github.com/user-attachments/assets/27199437-fb4e-4137-a7e0-ec9118f2d643" width="400">
     </td>
-    <td width="50%" align="center">
-      <p><b>H.E.I.K.K.I</b></p>
-      <img src="https://github.com/user-attachments/assets/9faa9036-6f44-4fdf-9da8-3016fbd45e9f" style="max-width:100%;">
+    <td align="center">
+      <b>What we did with it</b><br>
+      <img src="https://github.com/user-attachments/assets/64ca82bb-6690-4827-8654-55ee8cf42c66 width="400">
+" width="400">
     </td>
   </tr>
 </table>
 
-https://github.com/user-attachments/assets/b06bbfc4-48c5-49da-aef6-feb600f2d9e2
+<br>
+
+<div align="center">
+  <p><b>What we ended up with</b></p>
+  <img src="https://github.com/user-attachments/assets/b77adc1e-d774-4b4f-9b8e-7a31101706ca" width="400">
+  
+  <br><br>
+  
+  <p><b> What it does </b></p>
+  <video src="https://github.com/user-attachments/assets/790e511f-4a50-4962-8b1b-4c1e42f55187" width="400" controls></video>
+</div>
+
+<br>
+
+
+
+https://github.com/user-attachments/assets/790e511f-4a50-4962-8b1b-4c1e42f55187
+
 
