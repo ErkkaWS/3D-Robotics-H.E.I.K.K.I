@@ -32,5 +32,3 @@ We builded a thing using 3D printed stuffeling, Robotic thingelings using Arduin
 </div>
 
 <br>
-
-![Screenshot_20260304_211415_Gallery](https://github.com/user-attachments/assets/ebd373d0-e2d1-4b7b-89b8-463f27911056)
