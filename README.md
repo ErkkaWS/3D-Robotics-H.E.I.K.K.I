@@ -6,14 +6,18 @@ We builded a thing using 3D printed stuffeling, Robotic thingelings using Arduin
 
 <br>
 
-<div align="center">
-  <video src="https://github.com/user-attachments/assets/7cbb0d19-27fe-4264-bd67-999b089b089ede09" width="45%" controls muted title="Esittelyvideo"></video>
-  
-  <img src="https://github.com/user-attachments/assets/9faa9036-6f44-4fdf-9da8-3016fbd45e9f" width="45%" alt="H.E.I.K.K.I Lähikuva">
-</div>
+<table border="0">
+  <tr>
+    <td width="50%" align="center">
+      <p><b>Where we started</b></p>
+      <img src="https://github.com/user-attachments/assets/7eca45e3-5e45-43b0-a77d-da908def112a" style="max-width:100%;">
+    </td>
+    <td width="50%" align="center">
+      <p><b>H.E.I.K.K.I</b></p>
+      <img src="https://github.com/user-attachments/assets/9faa9036-6f44-4fdf-9da8-3016fbd45e9f" style="max-width:100%;">
+    </td>
+  </tr>
+</table>
 
-<br>
+https://github.com/user-attachments/assets/b06bbfc4-48c5-49da-aef6-feb600f2d9e2
 
-<div align="center">
-  <span><i>Videon esittely (vasen) ja valmis robotti (oikea)</i></span>
-</div>
