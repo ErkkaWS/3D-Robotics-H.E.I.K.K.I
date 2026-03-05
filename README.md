@@ -14,7 +14,7 @@ We builded a thing using 3D printed stuffeling, Robotic thingelings using Arduin
     </td>
     <td align="center">
       <b>What we did with it</b><br>
-      <img src="https://github.com/user-attachments/assets/64ca82bb-6690-4827-8654-55ee8cf42c66" width="400">
+      <img src="https://github.com/user-attachments/assets/ebd373d0-e2d1-4b7b-89b8-463f27911056" width="400">
     </td>
   </tr>
 </table>
@@ -32,3 +32,5 @@ We builded a thing using 3D printed stuffeling, Robotic thingelings using Arduin
 </div>
 
 <br>
+
+![Screenshot_20260304_211415_Gallery](https://github.com/user-attachments/assets/ebd373d0-e2d1-4b7b-89b8-463f27911056)
