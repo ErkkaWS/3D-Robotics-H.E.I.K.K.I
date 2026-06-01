@@ -302,12 +302,19 @@
     function typewriteDisclaimer(cb) {
       var el = document.getElementById("disclaimerEl");
       el.classList.add("visible");
-      var text = "\u26a0 Any resemblance to real persons or events is purely coincidental.\nNo professors were harmed in the making of this project.";
+      var text = "\u26a0 Any resemblance to real persons or events is purely coincidental.\nNo professors were harmed in the making nor naming of this project.";
       typeInto(el, text, 30, function() {
+        // color warning triangle red
+        el.innerHTML = el.innerHTML.replace("\u26a0", "<span style=\"color:#ff2020\">\u26a0</span>");
         setTimeout(function() {
           el.classList.add("blink");
           el.addEventListener("animationend", function() {
             el.classList.remove("blink");
+            // add down arrow after blink
+            var arrow = document.createElement("div");
+            arrow.style.cssText = "text-align:center;margin-top:1rem;color:#39ff14;font-size:1.8rem;animation:promptglow 1.8s ease-in-out infinite;";
+            arrow.textContent = "\u2B07";
+            el.parentNode.insertBefore(arrow, el.nextSibling);
             if (cb) cb();
           }, { once: true });
         }, 300);
