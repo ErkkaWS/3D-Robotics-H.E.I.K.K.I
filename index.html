@@ -118,6 +118,8 @@
     }
     .disclaimer .warn { color: #ff2020; }
     .disclaimer.blink { animation: textblink 0.35s step-end 6; }
+    .warn { animation: warnglow 1s step-end infinite; }
+    @keyframes warnglow { 0%,49%{ color: #39ff14; } 50%,100%{ color: #ff2020; } }
     @keyframes textblink { 0%,100%{opacity:1;} 50%{opacity:0;} }
     .divider { border: none; border-top: 1px solid #1e1e1e; margin: 1.5rem 0; }
     .images-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
@@ -302,7 +304,7 @@
     function typewriteDisclaimer(cb) {
       var el = document.getElementById("disclaimerEl");
       el.classList.add("visible");
-      var text = "\u26a0 Any resemblance to real persons or events is purely coincidental.\nNo professors were harmed in the making nor naming of this project.";
+      var text = "\u26a0 Any resemblance to real persons or events is purely coincidental.\nNo professors were harmed in the making of this project.";
       typeInto(el, text, 30, function() {
         // color warning triangle red
         el.innerHTML = el.innerHTML.replace("\u26a0", "<span style=\"color:#ff2020\">\u26a0</span>");
@@ -356,7 +358,7 @@
                 });
               }, 200);
             });
-          }, 1500);
+          }, 1800);
         }, 300);
       }, 200);
     }
@@ -364,7 +366,7 @@
     // Boot sequence on load
     window.addEventListener("load", function() {
       setTimeout(function() {
-        addRow("SYSTEM ONLINE ?",                          { first:true,  speed:55 }, function() {
+        addRow("SYSTEM ONLINE",                          { first:true,  speed:55 }, function() {
         addRow("UNIT: H.E.I.K.K.I v1.0",               { speed:35 },              function() {
         addRow("COURSE: 3D-ROBOTICS BY PROF. H.HIETALA", { speed:25 },        function() {
         addRow("INITIATING TOMFOOLERY SEQUENCE...",      { speed:30 },              function() {
