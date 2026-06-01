@@ -318,6 +318,8 @@
               var sub = document.getElementById("subtitleEl");
               typeInto(sub, "Haaga-Heliaa Edustava Intellektuelli Kaljaa Kittaava Individuaali", 28, function() {
                 setTimeout(function() {
+                  typeInto(sub, "\nroughly translated:", 22, function() {
+                  setTimeout(function() {
                   typeInto(sub, "\nThe Haaga-Helia Representative Intellectual Beer-Guzzling Individual", 22, function() {
                     setTimeout(function() {
                       showBlock("introEl", function() {
@@ -328,6 +330,8 @@
                         }, 1200);
                       });
                     }, 500);
+                  });
+                  }, 200);
                   });
                 }, 300);
               });
