@@ -15,154 +15,173 @@
     }
     .container { max-width: 680px; width: 100%; }
 
-    .status-bar {
-      display: flex; gap: 1.5rem; flex-wrap: wrap;
-      font-size: 0.68rem; color: #555; align-items: center;
-      margin-bottom: 1rem; opacity: 0; transition: opacity 0.6s;
+    .boot-screen {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 2.5rem;
+      min-height: 60vh; justify-content: center;
     }
-    .status-bar.visible { opacity: 1; }
-    .dot {
-      display: inline-block; width: 7px; height: 7px; border-radius: 50%;
-      background: #3B6D11; margin-right: 5px;
-      animation: pulse 2s ease-in-out infinite;
+
+    .status-lines {
+      width: 100%; display: flex; flex-direction: column; gap: 0.45rem;
+      font-size: 0.88rem; letter-spacing: 0.06em;
     }
-    @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:0.3;} }
-    .repo-link {
-      font-size: 0.68rem; color: #444; text-decoration: none;
-      letter-spacing: 0.05em; transition: color 0.15s; margin-left: auto;
+    .cli-row.center { margin-top: 2.5rem; }
+    .cli-row { display: block; color: #aaa; }
+    .cli-row.center { text-align: center; }
+    .prompt { color: #3B6D11; }
+
+    .online-dot {
+      display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+      background: #4caf50; margin-left: 8px; vertical-align: middle;
+      box-shadow: 0 0 6px #4caf50, 0 0 12px #4caf50;
+      animation: glow 1.8s ease-in-out infinite;
     }
-    .repo-link:hover { color: #888; }
+    @keyframes glow {
+      0%,100% { box-shadow: 0 0 4px #4caf50, 0 0 8px #4caf50; opacity:1; }
+      50% { box-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50; opacity:0.7; }
+    }
+
+    .cli-cursor {
+      display: inline-block; width: 9px; height: 1.1em;
+      background: #e0e0e0; vertical-align: -2px; margin-left: 1px;
+      animation: blink 0.9s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+    .github-link {
+      color: #aaa; text-decoration: none; transition: color 0.15s;
+    }
+    .github-link:hover { color: #fff; }
 
     .play-wrap {
-      display: flex; align-items: center; gap: 1.5rem;
-      margin-bottom: 2.5rem; opacity: 0; transition: opacity 0.6s;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1rem;
+      opacity: 0; transition: opacity 0.4s;
     }
     .play-wrap.visible { opacity: 1; }
+
     .play-btn {
-      flex-shrink: 0; background: none; border: 2px solid #e0e0e0;
-      border-radius: 50%; width: 68px; height: 68px; cursor: pointer;
+      background: none; border: 2px solid #e0e0e0;
+      border-radius: 50%; width: 110px; height: 110px; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.15s, transform 0.1s, border-color 0.15s;
     }
-    .play-btn:hover { background: rgba(255,255,255,0.08); transform: scale(1.08); border-color: #fff; }
+    .play-btn:hover { background: rgba(255,255,255,0.08); transform: scale(1.06); border-color: #fff; }
     .play-btn:active { transform: scale(0.96); }
-    .play-btn svg { width: 30px; height: 30px; fill: #fff; margin-left: 4px; }
+    .play-btn svg { width: 46px; height: 46px; fill: #fff; margin-left: 6px; }
     .play-btn.playing svg { margin-left: 0; }
-    .play-label { font-size: 0.55rem; color: #666; text-align: center; margin-top: 5px; letter-spacing: 0.06em; max-width: 80px; line-height: 1.4; }
-    .now-playing { font-size: 0.72rem; color: #888; display: none; align-items: center; gap: 0.5rem; }
+
+    .play-label {
+      font-size: 0.88rem; color: #aaa; text-align: center;
+      letter-spacing: 0.06em; min-height: 1.2rem;
+      font-family: "Share Tech Mono", monospace;
+    }
+
+    .now-playing { font-size: 0.82rem; color: #888; display: none; align-items: center; gap: 0.6rem; }
     .now-playing.visible { display: flex; }
-    .bars { display: flex; gap: 2px; align-items: flex-end; height: 14px; }
+    .bars { display: flex; gap: 2px; align-items: flex-end; height: 16px; }
     .bars span { display: block; width: 3px; background: #888; border-radius: 1px; animation: eq 0.8s ease-in-out infinite; }
     .bars span:nth-child(1){height:6px;animation-delay:0s;}
-    .bars span:nth-child(2){height:12px;animation-delay:0.15s;}
-    .bars span:nth-child(3){height:8px;animation-delay:0.3s;}
-    .bars span:nth-child(4){height:14px;animation-delay:0.1s;}
+    .bars span:nth-child(2){height:13px;animation-delay:0.15s;}
+    .bars span:nth-child(3){height:9px;animation-delay:0.3s;}
+    .bars span:nth-child(4){height:15px;animation-delay:0.1s;}
     .bars span:nth-child(5){height:5px;animation-delay:0.25s;}
     @keyframes eq { 0%,100%{transform:scaleY(0.4);}50%{transform:scaleY(1);} }
 
-    .title-block { margin-bottom: 1.5rem; }
+    .main-content { width: 100%; }
+    .title-block { margin-bottom: 2rem; }
     h1 {
       font-family: "Orbitron", monospace;
-      font-size: clamp(1.4rem, 5vw, 2.2rem); font-weight: 700;
-      color: #fff; line-height: 1.2; letter-spacing: 0.05em; min-height: 2.8rem;
+      font-size: clamp(2rem, 7vw, 3.2rem); font-weight: 700;
+      color: #fff; line-height: 1.2; letter-spacing: 0.05em; min-height: 4rem;
     }
     .subtitle {
-      font-size: 0.72rem; color: #888; margin-top: 0.5rem;
-      letter-spacing: 0.04em; line-height: 1.9; white-space: pre-wrap; min-height: 3rem;
+      font-size: 0.92rem; color: #888; margin-top: 0.6rem;
+      letter-spacing: 0.04em; line-height: 2; white-space: pre-wrap; min-height: 4rem;
     }
-
     .seq-block { opacity: 0; transform: translateY(6px); transition: opacity 0.5s, transform 0.5s; }
     .seq-block.visible { opacity: 1; transform: translateY(0); }
-
-    .intro { font-size: 0.85rem; color: #aaa; margin: 0 0 0.75rem; line-height: 1.8; }
-
+    .intro { font-size: 1rem; color: #aaa; margin: 0 0 1rem; line-height: 1.9; }
     .disclaimer {
-      font-size: 0.72rem; color: #666; border-left: 2px solid #333;
-      padding-left: 0.75rem; margin-bottom: 1.5rem; line-height: 1.7;
-      white-space: pre-wrap;
+      font-size: 0.88rem; color: #666; border-left: 2px solid #333;
+      padding-left: 1rem; margin-bottom: 1.5rem; line-height: 1.8; white-space: pre-wrap;
     }
     .disclaimer.blink { animation: textblink 0.35s step-end 6; }
     @keyframes textblink { 0%,100%{opacity:1;} 50%{opacity:0;} }
-
     .divider { border: none; border-top: 1px solid #1e1e1e; margin: 1.5rem 0; }
     .images-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
     .img-block { text-align: center; }
     .img-block p, .img-full p, .video-block p {
-      font-size: 0.65rem; color: #555; letter-spacing: 0.08em; margin-bottom: 0.5rem; text-transform: uppercase;
+      font-size: 0.72rem; color: #555; letter-spacing: 0.08em; margin-bottom: 0.5rem; text-transform: uppercase;
     }
     .img-block img { width: 100%; border-radius: 4px; border: 1px solid #1e1e1e; display: block; }
     .img-full { text-align: center; margin-bottom: 1rem; }
     .img-full img { max-width: 400px; width: 100%; border-radius: 4px; border: 1px solid #1e1e1e; }
     .video-block { text-align: center; margin-bottom: 1.5rem; }
     .video-block video { max-width: 400px; width: 100%; border-radius: 4px; border: 1px solid #1e1e1e; }
-    .footer-credit { font-size: 0.58rem; color: #2a2a2a; text-align: right; margin-top: 2rem; letter-spacing: 0.04em; }
+    .footer-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; margin-top: 2rem;
+    }
+    .footer-repo { font-size: 0.72rem; color: #444; text-decoration: none; letter-spacing: 0.05em; transition: color 0.15s; }
+    .footer-repo:hover { color: #888; }
+    .footer-credit { font-size: 0.58rem; color: #2a2a2a; letter-spacing: 0.04em; }
     #yt-player { display: none; }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <!-- 1. STATUS BAR + SOURCE -->
-    <div class="status-bar" id="statusBar">
-      <span><span class="dot"></span>SYSTEM ONLINE</span>
-      <span>UNIT: H.E.I.K.K.I v1.0</span>
-      <span>COURSE: 3D-ROBOTICS</span>
-      <a href="https://github.com/ErkkaWS/3D-Robotics-H.E.I.K.K.I" class="repo-link" target="_blank">[ SOURCE ]</a>
-    </div>
-
-    <!-- 2. PLAY BUTTON (below source) -->
-    <div class="play-wrap" id="playWrap">
-      <div>
+    <div class="boot-screen" id="bootScreen">
+      <div class="status-lines" id="statusLines"></div>
+      <div class="play-wrap" id="playWrap">
         <button class="play-btn" id="playBtn" aria-label="Play theme song" onclick="togglePlay()">
           <svg id="playIcon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
         </button>
-        <p class="play-label" id="playLabel">PLAY ME FOR THEME</p>
-      </div>
-      <div class="now-playing" id="nowPlaying">
-        <div class="bars"><span></span><span></span><span></span><span></span><span></span></div>
-        &#9835; The Robots &#8212; Kraftwerk
-      </div>
-    </div>
-
-    <!-- 3. TITLE typewriter -->
-    <div class="title-block">
-      <h1 id="titleEl"></h1>
-      <p class="subtitle" id="subtitleEl"></p>
-    </div>
-
-    <!-- 4. GREETINGS fade in with reading delay -->
-    <p class="intro seq-block" id="introEl">
-      Greetings and welcome!<br>
-      We builded this monstrosity thingymajig using 3D printed stuffelings and robotic thingelings via Arduino IDE.
-    </p>
-
-    <!-- 5. DISCLAIMER typewriter + blink -->
-    <div class="disclaimer seq-block" id="disclaimerEl"></div>
-
-    <!-- 6. MEDIA -->
-    <div class="seq-block" id="mediaEl">
-      <hr class="divider">
-      <div class="images-grid">
-        <div class="img-block">
-          <p>What we started with</p>
-          <img src="https://github.com/user-attachments/assets/27199437-fb4e-4137-a7e0-ec9118f2d643" alt="Starting material">
-        </div>
-        <div class="img-block">
-          <p>What we did with it</p>
-          <img src="https://github.com/user-attachments/assets/ebd373d0-e2d1-4b7b-89b8-463f27911056" alt="Work in progress">
+        <p class="play-label" id="playLabel"></p>
+        <div class="now-playing" id="nowPlaying">
+          <div class="bars"><span></span><span></span><span></span><span></span><span></span></div>
+          &#9835; The Robots &#8212; Kraftwerk
         </div>
       </div>
-      <div class="img-full">
-        <p>What we ended up with</p>
-        <img src="https://github.com/user-attachments/assets/b77adc1e-d774-4b4f-9b8e-7a31101706ca" alt="Final result">
-      </div>
-      <div class="video-block">
-        <p>What it does</p>
-        <video src="https://github.com/user-attachments/assets/790e511f-4a50-4962-8b1b-4c1e42f55187" controls></video>
-      </div>
     </div>
 
-    <p class="footer-credit">index.html assisted by Claude Sonnet 4.6 &#129302;</p>
+    <div class="main-content" id="mainContent" style="display:none;">
+      <div class="title-block">
+        <h1 id="titleEl"></h1>
+        <p class="subtitle" id="subtitleEl"></p>
+      </div>
+      <p class="intro seq-block" id="introEl">
+        Greetings and welcome!<br>
+        We builded this monstrosity thingymajig using 3D printed stuffelings and robotic thingelings via Arduino IDE.
+      </p>
+      <div class="disclaimer seq-block" id="disclaimerEl"></div>
+      <div class="seq-block" id="mediaEl">
+        <hr class="divider">
+        <div class="images-grid">
+          <div class="img-block">
+            <p>What we started with</p>
+            <img src="https://github.com/user-attachments/assets/27199437-fb4e-4137-a7e0-ec9118f2d643" alt="Starting material">
+          </div>
+          <div class="img-block">
+            <p>What we did with it</p>
+            <img src="https://github.com/user-attachments/assets/ebd373d0-e2d1-4b7b-89b8-463f27911056" alt="Work in progress">
+          </div>
+        </div>
+        <div class="img-full">
+          <p>What we ended up with</p>
+          <img src="https://github.com/user-attachments/assets/b77adc1e-d774-4b4f-9b8e-7a31101706ca" alt="Final result">
+        </div>
+        <div class="video-block">
+          <p>What it does</p>
+          <video src="https://github.com/user-attachments/assets/790e511f-4a50-4962-8b1b-4c1e42f55187" controls></video>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <a href="https://github.com/ErkkaWS/3D-Robotics-H.E.I.K.K.I" class="footer-repo" target="_blank">[ TO GITHUB ]</a>
+        <p class="footer-credit">index.html assisted by Claude Sonnet 4.6 &#129302;</p>
+      </div>
+    </div>
 
   </div>
   <div id="yt-player"></div>
@@ -172,28 +191,20 @@
     tag.src = "https://www.youtube.com/iframe_api";
     document.head.appendChild(tag);
 
-    var player, playing = false, playerReady = false;
+    var player, playing = false, playerReady = false, sequenceStarted = false;
 
     function onYouTubeIframeAPIReady() {
       player = new YT.Player("yt-player", {
         videoId: "68d8GRgiec4",
-        playerVars: { autoplay:1, mute:1, controls:0, loop:1, playlist:"68d8GRgiec4" },
-        events: {
-          onReady: function(e) {
-            playerReady = true;
-            e.target.playVideo();
-            setTimeout(function() {
-              try { e.target.unMute(); e.target.setVolume(80); playing = true; updateUI(); } catch(err){}
-            }, 800);
-          }
-        }
+        playerVars: { autoplay:0, controls:0, loop:1, playlist:"68d8GRgiec4" },
+        events: { onReady: function() { playerReady = true; } }
       });
     }
 
     function togglePlay() {
       if (!playerReady) return;
       if (playing) { player.pauseVideo(); playing = false; }
-      else { player.playVideo(); player.unMute(); playing = true; }
+      else { player.playVideo(); player.unMute(); playing = true; startSequence(); }
       updateUI();
     }
 
@@ -207,16 +218,69 @@
         label.textContent = "STOP"; btn.classList.add("playing"); np.classList.add("visible");
       } else {
         icon.innerHTML = "<polygon points=\"5,3 19,12 5,21\"/>";
-        label.textContent = "THEME"; btn.classList.remove("playing"); np.classList.remove("visible");
+        btn.classList.remove("playing"); np.classList.remove("visible");
       }
     }
 
-    function typewrite(el, text, speed, cb) {
+    // Add one CLI row to statusLines with typewriter effect
+    function addRow(text, opts, cb) {
+      var centered = opts && opts.center;
+      var isFirst  = opts && opts.first;
+      var isLink   = opts && opts.link;
+      var speed    = opts && opts.speed ? opts.speed : 35;
+
+      var container = document.getElementById("statusLines");
+      var row = document.createElement("span");
+      row.className = "cli-row" + (centered ? " center" : "");
+
+      var prompt = document.createElement("span");
+      prompt.className = "prompt";
+      prompt.textContent = "> ";
+      row.appendChild(prompt);
+
+      var cursor = document.createElement("span");
+      cursor.className = "cli-cursor";
+      row.appendChild(cursor);
+      container.appendChild(row);
+
       var i = 0;
       var t = setInterval(function() {
-        el.textContent += text[i]; i++;
-        if (i >= text.length) { clearInterval(t); if (cb) cb(); }
+        cursor.insertAdjacentText("beforebegin", text[i]);
+        i++;
+        if (i >= text.length) {
+          clearInterval(t);
+          cursor.remove();
+          if (isFirst) {
+            var dot = document.createElement("span");
+            dot.className = "online-dot";
+            row.appendChild(dot);
+          }
+          if (isLink) {
+            row.innerHTML = "<span class=\"prompt\">&#62; </span><a href=\"https://github.com/ErkkaWS/3D-Robotics-H.E.I.K.K.I\" class=\"github-link\" target=\"_blank\">" + text + "</a>";
+            row.className = "cli-row center";
+          }
+          if (cb) setTimeout(cb, 120);
+        }
       }, speed);
+    }
+
+    // Typewrite into any element with cursor
+    function typeInto(el, text, speed, cb) {
+      var cursor = document.createElement("span");
+      cursor.className = "cli-cursor";
+      el.appendChild(cursor);
+      var i = 0;
+      var t = setInterval(function() {
+        cursor.insertAdjacentText("beforebegin", text[i]);
+        i++;
+        if (i >= text.length) { clearInterval(t); cursor.remove(); if (cb) cb(); }
+      }, speed);
+    }
+
+    function typePlayLabel(cb) {
+      var el = document.getElementById("playLabel");
+      el.textContent = "";
+      typeInto(el, "> PLAY ME FOR THEME", 60, cb);
     }
 
     function showBlock(id, cb) {
@@ -228,8 +292,7 @@
       var el = document.getElementById("disclaimerEl");
       el.classList.add("visible");
       var text = "\u26a0 Any resemblance to real persons or events is purely coincidental.\nNo professors were harmed in the making of this project.";
-      typewrite(el, text, 30, function() {
-        // blink the disclaimer text after typing
+      typeInto(el, text, 30, function() {
         setTimeout(function() {
           el.classList.add("blink");
           el.addEventListener("animationend", function() {
@@ -240,60 +303,56 @@
       });
     }
 
-    window.addEventListener("load", function() {
-      // 1. Status bar
+    function startSequence() {
+      if (sequenceStarted) return;
+      sequenceStarted = true;
       setTimeout(function() {
-        document.getElementById("statusBar").classList.add("visible");
-      }, 200);
-
-      // 2. Play button simultaneously with status bar
-      setTimeout(function() {
-        document.getElementById("playWrap").classList.add("visible");
-      }, 200);
-
-      // 3. Typewrite H.E.I.K.K.I
-      setTimeout(function() {
-        var titleEl = document.getElementById("titleEl");
-        typewrite(titleEl, "H.E.I.K.K.I", 80, function() {
-
-          // 4. Finnish subtitle
-          setTimeout(function() {
-            var subEl = document.getElementById("subtitleEl");
-            var fi = "Haaga-Heliaa Edustava Intellektuelli Kaljaa Kittaava Individuaali";
-            typewrite(subEl, fi, 28, function() {
-
-              // 5. English on new line
-              setTimeout(function() {
-                var eng = "\nThe Haaga-Helia Representative Intellectual Beer-Guzzling Individual";
-                var j = 0;
-                var t2 = setInterval(function() {
-                  subEl.textContent += eng[j]; j++;
-                  if (j >= eng.length) {
-                    clearInterval(t2);
-
-                    // 6. Greetings — longer reading delay
+        var boot = document.getElementById("bootScreen");
+        boot.style.transition = "all 0.5s";
+        boot.style.minHeight = "0";
+        boot.style.marginBottom = "2rem";
+        document.getElementById("mainContent").style.display = "block";
+        setTimeout(function() {
+          typeInto(document.getElementById("titleEl"), "H.E.I.K.K.I", 80, function() {
+            setTimeout(function() {
+              var sub = document.getElementById("subtitleEl");
+              typeInto(sub, "Haaga-Heliaa Edustava Intellektuelli Kaljaa Kittaava Individuaali", 28, function() {
+                setTimeout(function() {
+                  typeInto(sub, "\nThe Haaga-Helia Representative Intellectual Beer-Guzzling Individual", 22, function() {
                     setTimeout(function() {
                       showBlock("introEl", function() {
-
-                        // 7. Disclaimer — typewriter + blink, extra reading delay before
                         setTimeout(function() {
                           typewriteDisclaimer(function() {
-
-                            // 8. Media
-                            setTimeout(function() {
-                              showBlock("mediaEl", null);
-                            }, 400);
+                            setTimeout(function() { showBlock("mediaEl", null); }, 400);
                           });
                         }, 1200);
                       });
                     }, 500);
-                  }
-                }, 22);
-              }, 300);
-            });
-          }, 200);
+                  });
+                }, 300);
+              });
+            }, 200);
+          });
+        }, 300);
+      }, 200);
+    }
+
+    // Boot sequence on load
+    window.addEventListener("load", function() {
+      setTimeout(function() {
+        addRow("SYSTEM ONLINE",                          { first:true,  speed:55 }, function() {
+        addRow("UNIT: H.E.I.K.K.I v1.0",               { speed:35 },              function() {
+        addRow("COURSE: 3D-ROBOTICS BY PROF. HEIKKI HIETALA", { speed:25 },        function() {
+        addRow("INITIATING TOMFOOLERY SEQUENCE...",      { speed:30 },              function() {
+        addRow("[ CLICK HERE TO GO TO GITHUB ]",         { center:true, link:true, speed:40 }, function() {
+          document.getElementById("playWrap").classList.add("visible");
+          setTimeout(function() { typePlayLabel(null); }, 300);
         });
-      }, 1800);
+        });
+        });
+        });
+        });
+      }, 300);
     });
   </script>
 </body>
