@@ -358,7 +358,7 @@
                 });
               }, 200);
             });
-          }, 1500);
+          }, 1800);
         }, 300);
       }, 200);
     }
@@ -368,11 +368,13 @@
       setTimeout(function() {
         addRow("SYSTEM ONLINE",                          { first:true,  speed:55 }, function() {
         addRow("UNIT: H.E.I.K.K.I v1.0",               { speed:35 },              function() {
+        addRow("MADE BY: E.SETALA, V.VIRTANEN, J.SEPPANEN", { speed:30 },       function() {
         addRow("COURSE: 3D-ROBOTICS BY PROF. H.HIETALA", { speed:25 },        function() {
         addRow("INITIATING TOMFOOLERY SEQUENCE...",      { speed:30 },              function() {
         addRow("[ CLICK HERE TO GO TO GITHUB ]",         { center:true, link:true, speed:40 }, function() {
           document.getElementById("playWrap").classList.add("visible");
           setTimeout(function() { typePlayLabel(null); }, 300);
+        });
         });
         });
         });
