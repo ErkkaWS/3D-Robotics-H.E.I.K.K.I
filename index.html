@@ -7,72 +7,97 @@
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      background: #0a0a0a; color: #e0e0e0;
+      background: #0a0a0a;
+      color: #e0e0e0;
       font-family: "Share Tech Mono", monospace;
-      min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; padding: 2rem 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
     }
+
     .container { max-width: 680px; width: 100%; }
 
+    /* ── BOOT SCREEN ── */
     .boot-screen {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 2.5rem;
-      min-height: 60vh; justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+      min-height: 60vh;
+      justify-content: center;
     }
 
     .status-lines {
-      width: 100%; display: flex; flex-direction: column; gap: 0.45rem;
-      font-size: 0.88rem; letter-spacing: 0.06em;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
     }
-    .cli-row.center { margin-top: 2.5rem; }
+
     .cli-row { display: block; color: #aaa; }
-    .cli-row.center { text-align: center; }
+    .cli-row.center { text-align: center; margin-top: 2.5rem; }
+
     .prompt { color: #3B6D11; }
+
     .prompt-glow {
       color: #4caf50;
       animation: promptglow 1.8s ease-in-out infinite;
     }
-    @keyframes promptglow {
-      0%,100% { color: #4caf50; }
-      50% { color: #a8ffb0; }
-    }
 
     .online-dot {
-      display: inline-block; width: 9px; height: 9px; border-radius: 50%;
-      background: #4caf50; margin-left: 8px; vertical-align: middle;
+      display: inline-block;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: #4caf50;
+      margin-left: 8px;
+      vertical-align: middle;
       box-shadow: 0 0 6px #4caf50, 0 0 12px #4caf50;
       animation: glow 1.8s ease-in-out infinite;
     }
-    @keyframes glow {
-      0%,100% { box-shadow: 0 0 4px #4caf50, 0 0 8px #4caf50; opacity:1; }
-      50% { box-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50; opacity:0.7; }
-    }
 
     .cli-cursor {
-      display: inline-block; width: 9px; height: 1.1em;
-      background: #e0e0e0; vertical-align: -2px; margin-left: 1px;
+      display: inline-block;
+      width: 9px; height: 1.1em;
+      background: #e0e0e0;
+      vertical-align: -2px;
+      margin-left: 1px;
       animation: blink 0.9s step-end infinite;
     }
-    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
 
     .github-link {
-      color: #4caf50; text-decoration: none; transition: color 0.15s;
+      color: #4caf50;
+      text-decoration: none;
       animation: promptglow 1.8s ease-in-out infinite;
     }
     .github-link:hover { color: #fff; }
 
+    /* ── PLAY BUTTON ── */
     .play-wrap {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 1rem;
-      opacity: 0; transition: opacity 0.4s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      transition: opacity 0.4s;
     }
     .play-wrap.visible { opacity: 1; }
 
     .play-btn {
-      background: none; border: 2px solid #e0e0e0;
-      border-radius: 50%; width: 110px; height: 110px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      background: none;
+      border: 2px solid #e0e0e0;
+      border-radius: 50%;
+      width: 110px; height: 110px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: background 0.15s, transform 0.1s, border-color 0.15s;
     }
     .play-btn:hover { background: rgba(255,255,255,0.08); transform: scale(1.06); border-color: #fff; }
@@ -81,64 +106,122 @@
     .play-btn.playing svg { margin-left: 0; }
 
     .play-label {
-      font-size: 0.88rem; color: #4caf50; text-align: center;
-      letter-spacing: 0.06em; min-height: 1.2rem;
+      font-size: 0.88rem;
+      color: #4caf50;
+      text-align: center;
+      letter-spacing: 0.06em;
+      min-height: 1.2rem;
       font-family: "Share Tech Mono", monospace;
       animation: promptglow 1.8s ease-in-out infinite;
     }
 
-    .now-playing { font-size: 0.82rem; color: #4caf50; display: none; align-items: center; gap: 0.6rem; animation: promptglow 1.8s ease-in-out infinite; }
+    .now-playing {
+      font-size: 0.82rem;
+      color: #4caf50;
+      display: none;
+      align-items: center;
+      gap: 0.6rem;
+      animation: promptglow 1.8s ease-in-out infinite;
+    }
     .now-playing.visible { display: flex; }
-    .bars { display: flex; gap: 2px; align-items: flex-end; height: 16px; }
-    .bars span { display: block; width: 3px; background: #4caf50; border-radius: 1px; animation: eq 0.8s ease-in-out infinite, promptglow 1.8s ease-in-out infinite; }
-    .bars span:nth-child(1){height:6px;animation-delay:0s;}
-    .bars span:nth-child(2){height:13px;animation-delay:0.15s;}
-    .bars span:nth-child(3){height:9px;animation-delay:0.3s;}
-    .bars span:nth-child(4){height:15px;animation-delay:0.1s;}
-    .bars span:nth-child(5){height:5px;animation-delay:0.25s;}
-    @keyframes eq { 0%,100%{transform:scaleY(0.4);}50%{transform:scaleY(1);} }
 
+    .bars { display: flex; gap: 2px; align-items: flex-end; height: 16px; }
+    .bars span {
+      display: block; width: 3px;
+      background: #4caf50;
+      border-radius: 1px;
+      animation: eq 0.8s ease-in-out infinite, promptglow 1.8s ease-in-out infinite;
+    }
+    .bars span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+    .bars span:nth-child(2) { height: 13px; animation-delay: 0.15s; }
+    .bars span:nth-child(3) { height: 9px;  animation-delay: 0.3s; }
+    .bars span:nth-child(4) { height: 15px; animation-delay: 0.1s; }
+    .bars span:nth-child(5) { height: 5px;  animation-delay: 0.25s; }
+
+    /* ── MAIN CONTENT ── */
     .main-content { width: 100%; }
+
     .title-block { margin-bottom: 2rem; }
+
     h1 {
       font-family: "Orbitron", monospace;
-      font-size: clamp(2rem, 7vw, 3.2rem); font-weight: 700;
-      color: #fff; line-height: 1.2; letter-spacing: 0.05em; min-height: 4rem;
+      font-size: clamp(2rem, 7vw, 3.2rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      letter-spacing: 0.05em;
+      min-height: 4rem;
     }
+
     .subtitle {
-      font-size: 0.92rem; color: #888; margin-top: 0.6rem;
-      letter-spacing: 0.04em; line-height: 2; white-space: pre-wrap; min-height: 4rem;
+      font-size: 0.92rem;
+      color: #888;
+      margin-top: 0.6rem;
+      letter-spacing: 0.04em;
+      line-height: 2;
+      white-space: pre-wrap;
+      min-height: 4rem;
     }
+
     .seq-block { opacity: 0; transform: translateY(6px); transition: opacity 0.5s, transform 0.5s; }
     .seq-block.visible { opacity: 1; transform: translateY(0); }
+
     .intro { font-size: 1rem; color: #aaa; margin: 0 0 1rem; line-height: 1.9; }
+
     .disclaimer {
-      font-size: 0.88rem; color: #39ff14; border-left: 2px solid #333;
-      padding-left: 1rem; margin-bottom: 1.5rem; line-height: 1.8; white-space: pre-wrap;
+      font-size: 0.88rem;
+      color: #39ff14;
+      border-left: 2px solid #333;
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
     }
-    .disclaimer .warn { color: #ff2020; }
     .disclaimer.blink { animation: textblink 0.35s step-end 6; }
     .warn { animation: warnglow 1s step-end infinite; }
-    @keyframes warnglow { 0%,49%{ color: #39ff14; } 50%,100%{ color: #ff2020; } }
-    @keyframes textblink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+    /* ── MEDIA ── */
     .divider { border: none; border-top: 1px solid #1e1e1e; margin: 1.5rem 0; }
+
     .images-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+
     .img-block { text-align: center; }
     .img-block p, .img-full p, .video-block p {
-      font-size: 0.72rem; color: #555; letter-spacing: 0.08em; margin-bottom: 0.5rem; text-transform: uppercase;
+      font-size: 0.72rem; color: #555;
+      letter-spacing: 0.08em; margin-bottom: 0.5rem; text-transform: uppercase;
     }
     .img-block img { width: 100%; border-radius: 4px; border: 1px solid #1e1e1e; display: block; }
+
     .img-full { text-align: center; margin-bottom: 1rem; }
     .img-full img { max-width: 400px; width: 100%; border-radius: 4px; border: 1px solid #1e1e1e; }
+
     .video-block { text-align: center; margin-bottom: 1.5rem; }
     .video-block video { max-width: 400px; width: 100%; border-radius: 4px; border: 1px solid #1e1e1e; }
+
     .footer-bar {
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem; margin-top: 2rem;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap;
+      gap: 1rem; margin-top: 2rem;
     }
     .footer-repo { font-size: 0.72rem; color: #444; text-decoration: none; letter-spacing: 0.05em; transition: color 0.15s; }
     .footer-repo:hover { color: #888; }
     .footer-credit { font-size: 0.58rem; color: #2a2a2a; letter-spacing: 0.04em; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes glow {
+      0%,100% { box-shadow: 0 0 4px #4caf50, 0 0 8px #4caf50; opacity: 1; }
+      50%      { box-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50; opacity: 0.7; }
+    }
+    @keyframes promptglow {
+      0%,100% { color: #4caf50; }
+      50%      { color: #a8ffb0; }
+    }
+    @keyframes blink      { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes eq         { 0%,100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
+    @keyframes textblink  { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+    @keyframes warnglow   { 0%,49%  { color: #39ff14; } 50%,100% { color: #ff2020; } }
+    @keyframes arrowblink { 0%,49%  { opacity: 1; } 50%,100% { opacity: 0; } }
+
     #yt-player { display: none; }
   </style>
 </head>
@@ -164,10 +247,7 @@
         <h1 id="titleEl"></h1>
         <p class="subtitle" id="subtitleEl"></p>
       </div>
-      <p class="intro seq-block" id="introEl">
-        Greetings and welcome!<br>
-        We builded this monstrosity thingymajig using 3D printed stuffelings and robotic thingelings via Arduino IDE.
-      </p>
+      <p class="intro seq-block" id="introEl"></p>
       <div class="disclaimer seq-block" id="disclaimerEl"></div>
       <div class="seq-block" id="mediaEl">
         <hr class="divider">
@@ -200,6 +280,7 @@
   <div id="yt-player"></div>
 
   <script>
+    // YouTube setup
     var tag = document.createElement("script");
     tag.src = "https://www.youtube.com/iframe_api";
     document.head.appendChild(tag);
@@ -209,38 +290,41 @@
     function onYouTubeIframeAPIReady() {
       player = new YT.Player("yt-player", {
         videoId: "68d8GRgiec4",
-        playerVars: { autoplay:0, controls:0, loop:1, playlist:"68d8GRgiec4" },
+        playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: "68d8GRgiec4" },
         events: { onReady: function() { playerReady = true; } }
       });
     }
 
     function togglePlay() {
-      if (!playerReady) return;
+      if (!playerReady) { playing = false; startSequence(); updateUI(); return; }
       if (playing) { player.pauseVideo(); playing = false; }
       else { player.playVideo(); player.unMute(); playing = true; startSequence(); }
       updateUI();
     }
 
     function updateUI() {
-      var icon = document.getElementById("playIcon");
+      var icon  = document.getElementById("playIcon");
       var label = document.getElementById("playLabel");
-      var btn = document.getElementById("playBtn");
-      var np = document.getElementById("nowPlaying");
+      var btn   = document.getElementById("playBtn");
+      var np    = document.getElementById("nowPlaying");
       if (playing) {
         icon.innerHTML = "<rect x=\"5\" y=\"3\" width=\"4\" height=\"18\"/><rect x=\"15\" y=\"3\" width=\"4\" height=\"18\"/>";
-        label.textContent = "STOP"; btn.classList.add("playing"); np.classList.add("visible");
+        label.textContent = "STOP";
+        btn.classList.add("playing");
+        np.classList.add("visible");
       } else {
         icon.innerHTML = "<polygon points=\"5,3 19,12 5,21\"/>";
-        btn.classList.remove("playing"); np.classList.remove("visible");
+        btn.classList.remove("playing");
+        np.classList.remove("visible");
       }
     }
 
-    // Add one CLI row to statusLines with typewriter effect
+    // Add a CLI row with typewriter effect
     function addRow(text, opts, cb) {
       var centered = opts && opts.center;
       var isFirst  = opts && opts.first;
       var isLink   = opts && opts.link;
-      var speed    = opts && opts.speed ? opts.speed : 35;
+      var speed    = (opts && opts.speed) ? opts.speed : 35;
 
       var container = document.getElementById("statusLines");
       var row = document.createElement("span");
@@ -277,7 +361,7 @@
       }, speed);
     }
 
-    // Typewrite into any element with cursor
+    // Typewrite text into any element
     function typeInto(el, text, speed, cb) {
       var cursor = document.createElement("span");
       cursor.className = "cli-cursor";
@@ -290,10 +374,20 @@
       }, speed);
     }
 
+    // Typewrite the play label with glowing prompt
     function typePlayLabel(cb) {
       var el = document.getElementById("playLabel");
-      el.textContent = "";
-      el.innerHTML = "<span class=\"prompt-glow\">&#62; </span>"; var cur = document.createElement("span"); cur.className = "cli-cursor"; el.appendChild(cur); var txt = "PLAY ME FOR THEME"; var i=0; var t=setInterval(function(){ cur.insertAdjacentText("beforebegin",txt[i]); i++; if(i>=txt.length){clearInterval(t);cur.remove();if(cb)cb();} },60);
+      el.innerHTML = "<span class=\"prompt-glow\">&#62; </span>";
+      var cur = document.createElement("span");
+      cur.className = "cli-cursor";
+      el.appendChild(cur);
+      var txt = "PLAY ME FOR THEME";
+      var i = 0;
+      var t = setInterval(function() {
+        cur.insertAdjacentText("beforebegin", txt[i]);
+        i++;
+        if (i >= txt.length) { clearInterval(t); cur.remove(); if (cb) cb(); }
+      }, 60);
     }
 
     function showBlock(id, cb) {
@@ -301,20 +395,22 @@
       if (cb) setTimeout(cb, 600);
     }
 
+    // Typewrite disclaimer with warn triangle, blink, then arrow
     function typewriteDisclaimer(cb) {
       var el = document.getElementById("disclaimerEl");
       el.classList.add("visible");
-      var text = "\u26a0 Any resemblance to real persons or events is purely coincidental.\nNo professors were harmed in the making of this project.";
+      var warnSpan = document.createElement("span");
+      warnSpan.className = "warn";
+      warnSpan.textContent = "\u26a0";
+      el.appendChild(warnSpan);
+      var text = " Any resemblance to real persons or events is purely coincidental.\nNo professors were harmed in the making nor naming of this project.";
       typeInto(el, text, 30, function() {
-        // color warning triangle red
-        el.innerHTML = el.innerHTML.replace("⚠", "<span class=\"warn\">⚠</span>");
         setTimeout(function() {
           el.classList.add("blink");
           el.addEventListener("animationend", function() {
             el.classList.remove("blink");
-            // add down arrow after blink
             var arrow = document.createElement("div");
-            arrow.style.cssText = "text-align:center;margin-top:1rem;color:#39ff14;font-size:1.8rem;animation:promptglow 1.8s ease-in-out infinite;";
+            arrow.style.cssText = "text-align:center;margin-top:1rem;color:#39ff14;font-size:1.8rem;animation:arrowblink 0.8s step-end infinite;";
             arrow.textContent = "\u2B07";
             el.parentNode.insertBefore(arrow, el.nextSibling);
             if (cb) cb();
@@ -323,6 +419,7 @@
       });
     }
 
+    // Main content sequence triggered by play button
     function startSequence() {
       if (sequenceStarted) return;
       sequenceStarted = true;
@@ -339,11 +436,13 @@
                 var sub = document.getElementById("subtitleEl");
                 typeInto(sub, "Haaga-Heliaa Edustava Intellektuelli Kaljaa Kittaava Individuaali", 28, function() {
                   setTimeout(function() {
-                    typeInto(sub, "\nroughly translated:", 22, function() {
+                    typeInto(sub, "\n\nAPPROXIMATE TRANSLATION FOLLOWS:", 22, function() {
                       setTimeout(function() {
                         typeInto(sub, "\nThe Haaga-Helia Representative Intellectual Beer-Guzzling Individual", 22, function() {
                           setTimeout(function() {
-                            showBlock("introEl", function() {
+                            var intro = document.getElementById("introEl");
+                            intro.classList.add("visible");
+                            typeInto(intro, "Greetings and welcome!\nWe builded this monstrosity thingymajig using 3D printed stuffelings and robotic thingelings via Arduino IDE.\n\nH.E.I.K.K.I is an ESP32-powered animatronic unit with a singular purpose: TO OBTAIN BEER.", 18, function() {
                               setTimeout(function() {
                                 typewriteDisclaimer(function() {
                                   setTimeout(function() { showBlock("mediaEl", null); }, 400);
@@ -363,15 +462,15 @@
       }, 200);
     }
 
-    // Boot sequence on load
+    // Boot screen: type status lines then show play button
     window.addEventListener("load", function() {
       setTimeout(function() {
-        addRow("SYSTEM ONLINE",                          { first:true,  speed:55 }, function() {
-        addRow("UNIT: H.E.I.K.K.I v1.0",               { speed:35 },              function() {
-        addRow("MADE BY: E.SETALA, V.VIRTANEN, J.SEPPANEN", { speed:30 },       function() {
-        addRow("COURSE: 3D-ROBOTICS BY PROF. H.HIETALA", { speed:25 },        function() {
-        addRow("INITIATING TOMFOOLERY SEQUENCE...",      { speed:30 },              function() {
-        addRow("[ CLICK HERE TO GO TO GITHUB ]",         { center:true, link:true, speed:40 }, function() {
+        addRow("SYSTEM ONLINE",                               { first: true, speed: 55 }, function() {
+        addRow("UNIT: H.E.I.K.K.I v1.0",                    { speed: 35 },              function() {
+        addRow("MADE BY: E.SETALA, V.VIRTANEN, J.SEPPANEN",  { speed: 30 },              function() {
+        addRow("COURSE: 3D-ROBOTICS BY PROF. H.HIETALA",     { speed: 25 },              function() {
+        addRow("INITIATING TOMFOOLERY SEQUENCE...",           { speed: 30 },              function() {
+        addRow("[ CLICK HERE TO GO TO GITHUB ]",              { center: true, link: true, speed: 40 }, function() {
           document.getElementById("playWrap").classList.add("visible");
           setTimeout(function() { typePlayLabel(null); }, 300);
         });
