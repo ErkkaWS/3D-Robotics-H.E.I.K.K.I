@@ -29,6 +29,14 @@
     .cli-row { display: block; color: #aaa; }
     .cli-row.center { text-align: center; }
     .prompt { color: #3B6D11; }
+    .prompt-glow {
+      color: #4caf50;
+      animation: promptglow 1.8s ease-in-out infinite;
+    }
+    @keyframes promptglow {
+      0%,100% { color: #4caf50; }
+      50% { color: #a8ffb0; }
+    }
 
     .online-dot {
       display: inline-block; width: 9px; height: 9px; border-radius: 50%;
@@ -49,7 +57,8 @@
     @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
 
     .github-link {
-      color: #aaa; text-decoration: none; transition: color 0.15s;
+      color: #4caf50; text-decoration: none; transition: color 0.15s;
+      animation: promptglow 1.8s ease-in-out infinite;
     }
     .github-link:hover { color: #fff; }
 
@@ -72,15 +81,16 @@
     .play-btn.playing svg { margin-left: 0; }
 
     .play-label {
-      font-size: 0.88rem; color: #aaa; text-align: center;
+      font-size: 0.88rem; color: #4caf50; text-align: center;
       letter-spacing: 0.06em; min-height: 1.2rem;
       font-family: "Share Tech Mono", monospace;
+      animation: promptglow 1.8s ease-in-out infinite;
     }
 
-    .now-playing { font-size: 0.82rem; color: #888; display: none; align-items: center; gap: 0.6rem; }
+    .now-playing { font-size: 0.82rem; color: #4caf50; display: none; align-items: center; gap: 0.6rem; animation: promptglow 1.8s ease-in-out infinite; }
     .now-playing.visible { display: flex; }
     .bars { display: flex; gap: 2px; align-items: flex-end; height: 16px; }
-    .bars span { display: block; width: 3px; background: #888; border-radius: 1px; animation: eq 0.8s ease-in-out infinite; }
+    .bars span { display: block; width: 3px; background: #4caf50; border-radius: 1px; animation: eq 0.8s ease-in-out infinite, promptglow 1.8s ease-in-out infinite; }
     .bars span:nth-child(1){height:6px;animation-delay:0s;}
     .bars span:nth-child(2){height:13px;animation-delay:0.15s;}
     .bars span:nth-child(3){height:9px;animation-delay:0.3s;}
@@ -257,7 +267,7 @@
             row.appendChild(dot);
           }
           if (isLink) {
-            row.innerHTML = "<span class=\"prompt\">&#62; </span><a href=\"https://github.com/ErkkaWS/3D-Robotics-H.E.I.K.K.I\" class=\"github-link\" target=\"_blank\">" + text + "</a>";
+            row.innerHTML = "<span class=\"prompt-glow\">&#62; </span><a href=\"https://github.com/ErkkaWS/3D-Robotics-H.E.I.K.K.I\" class=\"github-link\" target=\"_blank\">" + text + "</a>";
             row.className = "cli-row center";
           }
           if (cb) setTimeout(cb, 120);
@@ -281,7 +291,7 @@
     function typePlayLabel(cb) {
       var el = document.getElementById("playLabel");
       el.textContent = "";
-      typeInto(el, "> PLAY ME FOR THEME", 60, cb);
+      el.innerHTML = "<span class=\"prompt-glow\">&#62; </span>"; var cur = document.createElement("span"); cur.className = "cli-cursor"; el.appendChild(cur); var txt = "PLAY ME FOR THEME"; var i=0; var t=setInterval(function(){ cur.insertAdjacentText("beforebegin",txt[i]); i++; if(i>=txt.length){clearInterval(t);cur.remove();if(cb)cb();} },60);
     }
 
     function showBlock(id, cb) {
@@ -314,30 +324,32 @@
         boot.style.marginBottom = "2rem";
         document.getElementById("mainContent").style.display = "block";
         setTimeout(function() {
-          typeInto(document.getElementById("titleEl"), "H.E.I.K.K.I", 80, function() {
-            setTimeout(function() {
-              var sub = document.getElementById("subtitleEl");
-              typeInto(sub, "Haaga-Heliaa Edustava Intellektuelli Kaljaa Kittaava Individuaali", 28, function() {
-                setTimeout(function() {
-                  typeInto(sub, "\nroughly translated:", 22, function() {
+          setTimeout(function() {
+            typeInto(document.getElementById("titleEl"), "H.E.I.K.K.I", 80, function() {
+              setTimeout(function() {
+                var sub = document.getElementById("subtitleEl");
+                typeInto(sub, "Haaga-Heliaa Edustava Intellektuelli Kaljaa Kittaava Individuaali", 28, function() {
                   setTimeout(function() {
-                  typeInto(sub, "\nThe Haaga-Helia Representative Intellectual Beer-Guzzling Individual", 22, function() {
-                    setTimeout(function() {
-                      showBlock("introEl", function() {
-                        setTimeout(function() {
-                          typewriteDisclaimer(function() {
-                            setTimeout(function() { showBlock("mediaEl", null); }, 400);
-                          });
-                        }, 1200);
-                      });
-                    }, 500);
-                  });
-                  }, 200);
-                  });
-                }, 300);
-              });
-            }, 200);
-          });
+                    typeInto(sub, "\nroughly translated:", 22, function() {
+                      setTimeout(function() {
+                        typeInto(sub, "\nThe Haaga-Helia Representative Intellectual Beer-Guzzling Individual", 22, function() {
+                          setTimeout(function() {
+                            showBlock("introEl", function() {
+                              setTimeout(function() {
+                                typewriteDisclaimer(function() {
+                                  setTimeout(function() { showBlock("mediaEl", null); }, 400);
+                                });
+                              }, 1200);
+                            });
+                          }, 500);
+                        });
+                      }, 200);
+                    });
+                  }, 300);
+                });
+              }, 200);
+            });
+          }, 800);
         }, 300);
       }, 200);
     }
@@ -347,7 +359,7 @@
       setTimeout(function() {
         addRow("SYSTEM ONLINE",                          { first:true,  speed:55 }, function() {
         addRow("UNIT: H.E.I.K.K.I v1.0",               { speed:35 },              function() {
-        addRow("COURSE: 3D-ROBOTICS BY PROF. HEIKKI HIETALA", { speed:25 },        function() {
+        addRow("COURSE: 3D-ROBOTICS BY PROF. H.HIETALA", { speed:25 },        function() {
         addRow("INITIATING TOMFOOLERY SEQUENCE...",      { speed:30 },              function() {
         addRow("[ CLICK HERE TO GO TO GITHUB ]",         { center:true, link:true, speed:40 }, function() {
           document.getElementById("playWrap").classList.add("visible");
