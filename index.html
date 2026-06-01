@@ -307,7 +307,7 @@
       var text = "\u26a0 Any resemblance to real persons or events is purely coincidental.\nNo professors were harmed in the making of this project.";
       typeInto(el, text, 30, function() {
         // color warning triangle red
-        el.innerHTML = el.innerHTML.replace("\u26a0", "<span style=\"color:#ff2020\">\u26a0</span>");
+        el.innerHTML = el.innerHTML.replace("⚠", "<span class=\"warn\">⚠</span>");
         setTimeout(function() {
           el.classList.add("blink");
           el.addEventListener("animationend", function() {
@@ -358,7 +358,7 @@
                 });
               }, 200);
             });
-          }, 1800);
+          }, 1500);
         }, 300);
       }, 200);
     }
