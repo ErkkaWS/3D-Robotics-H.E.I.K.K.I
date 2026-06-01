@@ -1,11 +1,8 @@
-# 3D-Robotics-H.E.I.K.K.I
+<h1>3D-Robotics Course Project: H.E.I.K.K.I -
+<br> Haaga-Heliaa Edustava Intellektuelli Kaljaa Kittaava Individuaali</h1>
 
-**Project H.E.I.K.K.I** - Haaga-heliaa Edustava Intellektuelli Kaljaa Kittaava Individuaali
-
-Greetings and Welcome!
-We builded this monstrosity thingymajig using 3D printed stuffelings, Robotic thingelings by using Arduino IDE.
-
-
+Greetings and welcome!
+<br>We builded this monstrosity thingymajig using 3D printed stuffelings, Robotic thingelings by using Arduino IDE.
 <br>
 
 <table border="0">
