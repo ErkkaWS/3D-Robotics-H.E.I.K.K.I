@@ -3,7 +3,8 @@
 
 Greetings and welcome!
 <br>We builded this monstrosity thingymajig using 3D printed stuffelings, Robotic thingelings by using Arduino IDE.
-<br>
+> ⚠️ **Disclaimer:** Any resemblance to real persons or events is purely coincidental.
+> No professors were harmed in the making of this project.
 
 <table border="0">
   <tr>
